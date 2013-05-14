@@ -1,9 +1,0 @@
-digital
-p0.0 - light
-.1 - fan
-0.2 magnet in
-
-analog
-
-A0.0 - temp in
-A0.1 - ldr

@@ -1,9 +1,0 @@
-Here is some simple text
-which has numbers in it:
-The time is 10 o'clock.
-The year is 2012.
-This is the 10th month.
-We are in week 7 of class.
-A year has 365.25 days in it.
-My local phone number is 123-4567.
-With area code: 890-123-4567

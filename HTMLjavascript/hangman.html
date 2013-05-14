@@ -1,0 +1,114 @@
+<html>
+<head>
+<title> Hangman </title>
+<script>
+
+var guess = 0;
+var maxguess = 7;
+var guesschar = "";
+var  hiddenWord = "****";
+var word = "word";
+
+
+
+function update(){
+	if(guess == 1){
+	document.getElementById("cover1").setAttribute					("src","1.png");
+	}
+	else if(guess == 2){
+			document.getElementById("cover1").setAttribute	("src","2.png");
+	}
+	else if(guess == 3){
+			document.getElementById("cover1").setAttribute	("src","3.png");
+	}
+	else if(guess == 4){
+			document.getElementById("cover1").setAttribute	("src","4.png");
+	}	
+	else if(guess == 5){
+			document.getElementById("cover1").setAttribute	("src","5.png");
+	}
+	else if(guess == 6){
+			document.getElementById("cover1").setAttribute	("src","6.png");
+	}
+}
+ 
+function enterVal()
+{
+
+	var temp = "";
+	guesschar = document.Hangman.guessLetter.value;
+	if(word.indexOf(guesschar) == -1){
+		guess = guess +1;
+		document.Hangman.guesses.value = guess;
+		update();
+		
+	}
+	
+	
+	for(var i = 0; i<word.length; i++){
+		if(word.charAt(i) == guesschar){
+			temp += word.charAt(i);
+		}
+		else {
+			temp += hiddenWord.charAt(i);
+		}
+	}
+		hiddenWord = temp;
+	
+	
+	document.Hangman.mysteryWord.value = hiddenWord;
+	
+	
+	if(guess == maxguess){
+		alert("Game Over");
+	}
+	
+	var the = hiddenWord.indexOf("*");
+		
+	funct1(the);
+	
+	
+		
+		
+}
+function funct1(var1){
+	if(var1 == -1){
+		alert("you won");
+	}
+}
+
+
+
+</script>
+</head>
+<form name = "Hangman" >
+<table>
+<tr> 
+Word: <input name = "mysteryWord" type="text" size="10" length="10" value="">
+</tr>
+<tr>
+Incorrect guesses: <input name = "guesses" type="text" size="2" length="2" value="">
+</tr>
+<tr>
+Guess Letter: <input name = "guessLetter" type="text" size="3" length="3" value="">
+</tr>
+<tr>
+<input type = "button" name = "enter" value = "enter" onClick = "enterVal()">
+
+<img src="0.png" id="cover1" name="image"/>
+
+
+
+
+
+
+
+
+
+
+
+</tr>
+</table>
+</form>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>IDT chart example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
+$(function () {
+    var chart1,chart2,chart3;
+    var amHours = ['6:00 AM', '7:00', '8:00','9:00','10:00','11:00', '12:00 PM','1:00', '2:00', '3:00', '4:00', '5:00', '6:00'];
+    var pmHours = ['6:00 PM', '7:00', '8:00','9:00','10:00','11:00', '12:00 AM','1:00', '2:00', '3:00', '4:00', '5:00', '6:00'];
+    var mondayData = [8,2,3,4,10,6,9,12,3,12,4,3];
+    var tuesdayData= [2,0,3,5,7,2,5,7,0,1,3,7,];
+
+
+    $(document).ready(function() {
+
+        //this function draws the chart
+        function setChart(name,data,amOrPM) {
+            chart2.xAxis[0].setCategories(amOrPM, false);          
+            chart2.series[0].remove(false);
+            console.log(name);    
+            
+            chart2.addSeries({
+                name: 'site id', 
+                data: data,
+                color: 'blue'
+            });
+            chart2.redraw();
+        }
+
+        //this is the vertical bar chart
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar'
+            },
+            title: {
+                text: 'Weekly View'
+            },
+            
+            xAxis: {
+                categories: [
+                   'Monday',
+                   'Tuesday',
+                   'Wednesday',
+                   'Thursday',
+                   'Friday',
+                   'Saturdy',
+                   'Sunday'
+                ]
+
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Average Number of trains'
+                }  
+                
+    
+
+          
+            },
+
+            legend: {
+                layout: 'vertical',
+                backgroundColor: '#FFFFFF',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 100,
+                y: 70,
+                floating: true,
+                shadow: true
+            },
+            dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'left',
+                    x: 4,
+                    y: 10,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                    
+                    
+                },
+            plotOptions: {
+                bar: {
+                     dataLabels: {
+                        enabled: true,
+                        formatter: function() {
+                        return 'Max' + '<br>'+'Min' ;
+            }
+                    
+                    },
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function() {
+                                    if(this.x == 0){
+                                            
+                                            setChart("Monday",mondayData,amHours);
+                                        }
+                                     else if(this.x == 1){ 
+                                            
+                                            setChart("Tuesday",tuesdayData,amHours);    
+                                    }
+                                    else if(this.x == 2){ 
+                                            
+                                            setChart("Wednesday",tuesdayData,amHours);    
+                                    }
+                                    else if(this.x == 3){ 
+                                            
+                                            setChart("Thursday",tuesdayData,amHours);    
+                                    }
+                                    else if(this.x == 4){ 
+                                            
+                                            setChart("Friday",tuesdayData,amHours);    
+                                    }
+                                    else if(this.x == 5){ 
+                                            
+                                            setChart("Saturday",tuesdayData,amHours);    
+                                    }
+                                    else if(this.x == 6){ 
+                                            
+                                            setChart("Sunday",tuesdayData,amHours);    
+                                    }
+                                    
+                                
+                                }
+                            }
+                        }
+                    },
+                },
+            
+            tooltip: {
+                enabled: false,
+                formatter: function() {
+                    return ''+
+                        'Average: '+ this.y + '</br>' + 'Maximum: ' + '123\n' + 'Low:' + '123'; 
+                                     }
+            },
+        
+                series: [{
+                name: 'Site : 9981',
+                data: [2, 4, 6, 7, 8, 4, 3,]
+                
+          
+    
+        
+            }]
+        });
+
+    //area spline chart
+    chart2 = new Highcharts.Chart({
+    chart:{
+                renderTo: 'container2',
+                type: 'areaspline'
+            },
+            title: {
+                text: 'Hourly view'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF'
+            },
+            xAxis: {
+                categories: amHours,  //or pmHours
+                color: 'FFFF00'
+            },
+            yAxis: {
+                title: {
+                    text: 'Average Number of Trains'
+                }
+            },
+            
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    fillOpacity: 0.5
+
+                }
+            },
+
+            series: [{
+                name: 'Site Id',                //site id
+                data: ['this'],
+                color: 'white'
+            }]
+     });
+    
+    
+});
+});
+
+		</script>
+	</head>
+	<body>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>

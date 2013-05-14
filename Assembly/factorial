@@ -1,0 +1,63 @@
+	.data
+strInput:
+	.asciiz "What number do you want to use? "
+strOutput:
+	.asciiz "! is "
+	.text
+main: 
+li $v0, 4		#prompt user for input
+la $a0, strInput
+syscall
+		
+li $v0, 5		#take input and put into $v0
+syscall	
+
+			#move into $a0 so we can print, argument needs to be in $a0 to print
+move $a0, $v0
+move $t0, $a0
+li $v0, 1	
+syscall
+
+li $v0, 4
+
+			#print output string	
+la $a0, strOutput
+syscall
+
+move $a0, $t0 
+
+jal fac			#jumps to factorial function and stores current address +1 in RA
+move $a0,$v0		#returns value for fac is in $v0 and we need it in $a0 to call print function
+li $v0,1		#print system call
+syscall
+j end
+
+fac:
+subu $sp, $sp, 8	#callee responsibilities
+sw $ra, 4($sp)
+sw $a0, 8($sp)
+
+li $t1,1		#check base case
+beq $t1, $a0, baseReturn
+
+subi $a0, $a0,1		#subtracts 1 from $a0
+jal fac
+j recursiveReturn
+
+baseReturn:
+li $v0,1		#puts 1 in $v0
+addiu $sp, $sp,8		
+jr $ra
+
+recursiveReturn:
+lw $a0, 8($sp)		#get from stack
+mult $a0,$v0		#multiply numbers n*(n-1)
+mflo $v0
+lw $ra, 4($sp)
+addiu $sp,$sp, 8
+jr $ra
+
+end:
+
+
+

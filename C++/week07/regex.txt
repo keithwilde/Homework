@@ -1,0 +1,11 @@
+Regular expressions:
+. any character except \n
+* 0 ore more copies of the previous expression
+[] character class
+^ pattern must be at beginning of line
+[^   ] matches anything except what's in here
+$ pattern must be at end of the line
+{1,3} match 1 to 3 occurences of previous expression
++ one or more copies
+? 0 or one 
+| or

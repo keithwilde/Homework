@@ -1,0 +1,135 @@
+<html>
+<head>
+<title> Data Verification </title>
+<script>
+var name1 = "";
+var name2 = "";
+var age1 = "";
+var zip1 = "";
+var phone = "";
+var mail = "";
+var result = "";
+var error = false;
+
+
+function funct1(){
+	error = false;
+	result = "";
+	var patt1=new RegExp("^[A-Z][a-z]*$"); 
+	var patt2 = new RegExp("^[0]?[0-9]{2}$");
+	var patt3 = new RegExp("[0-9]{5}$"); 
+	var patt4 = /^\({1}([0-9]{3})\){1}([0-9]{3})[-. ]{1}([0-9]{4})$/;
+	var patt5 = /^[A-Za-z0-9 _]+@[A-Za-z0-9 _]+\.(com|gov|net|org|edu|mil)/;
+	
+	
+	
+	name1 = document.Data.fname.value;
+	name2 = document.Data.lname.value;
+	age1 = document.Data.age.value;
+	zip1 = document.Data.zip.value;
+	phone = document.Data.pnumber.value;
+	mail = document.Data.email.value;
+	
+	
+	if(patt1.test(name1) == false){
+		error = true;
+		document.Data.fname.value = "";
+		result = result + "First name must start with a capital and contain only letters\n";
+		
+		
+	}
+	if(patt1.test(name2) == false){
+		error = true;
+		document.Data.lname.value = "";
+		result = result + "Last Name must start with a capital and contain only letters\n";
+		
+		
+	}
+	if(patt2.test(age1) == false){
+		error = true;
+		document.Data.age.value = "";
+		result = result + "If age 3 digits first must be a 0\n";
+			
+	}
+	if(patt3.test(zip1) == false){
+		error = true;
+		document.Data.zip.value = "";
+		result += "Zip code must be 5 digits\n";
+	}
+	if(patt4.test(phone) == false){
+			
+		error = true;
+		document.Data.pnumber.value = "";
+		result += "Phone Number must be formatted: (###)###-####\n";
+	}
+	if(patt5.test(mail) == false){
+		error = true;
+		document.Data.email.value = "";
+		result += "Incorrect email format";
+	}
+	
+	if(error){
+		alert(result);
+	}
+	else
+	{
+		alert("All data entered is valid");
+		document.Data2.fname.value = name1;
+		document.Data2.lname.value = name2;
+		document.Data2.age.value = age1;
+		document.Data2.zip.value = zip1;
+		document.Data2.phone.value = phone;
+		document.Data2.email.value = mail;
+	}
+    	
+	
+}
+</script>
+</head>
+
+
+
+<body>
+<form name = "Data" >
+<table>
+<tr><td>
+First Name <input type = "text" name = "fname" value = "">
+</td></tr>
+<tr><td>
+Last Name <input type = "text" name = "lname" value = "">
+</td></tr>
+<tr><td>
+Age:  <input type = "text" name = "age" value = "" maxLength = "3" size = "3">
+</td></tr>
+<tr><td>
+Zip Code: <input type = "text" name = "zip" value = "" maxLength = "5" size="5">
+</td></tr>
+<tr><td>
+Phone Number:  <input type = "text" name = "pnumber" value = "" size = "15">
+</td></tr>
+<tr><td>
+E-mail <input type = "text" name = "email" value = "">
+</td></tr>
+<tr>
+<td>
+<input type = "button" name = "verify"  value = "verify" onClick = "funct1()">
+
+
+</td></tr>
+</table>
+</tr>
+</table>
+</form>
+
+<form name = "Data2" action = "http://localhost/data.php" method = "POST">
+<input name = "fname" type="text" size="10" length="10" value="">
+<input name = "lname" type="text" size="10" length="10" value="">
+<input name = "age" type="text" size="10" length="3" value="">
+<input name = "zip" type="text" size="10" length="10" value="">
+<input name = "phone" type="text" size="10" length="10" value="">
+<input name = "email" type="text" size="10" length="10" value="">
+<input type = "submit" value = "Submit" >
+</form>
+</body>
+
+</html>

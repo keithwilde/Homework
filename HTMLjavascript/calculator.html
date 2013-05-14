@@ -1,0 +1,95 @@
+<html>
+<head>
+
+	<title>Calculator</title>
+
+<script>
+var num1 = "";
+
+
+function input(val1){
+	num1 = num1+val1;
+	document.calc.calcdisp.value = num1;
+}
+function ev1()
+{
+	var temp = eval(num1);
+	document.calc.calcdisp.value = temp;
+	num1 = temp;
+	
+}
+function erase(){
+	num1 = "";
+	document.calc.calcdisp.value = "";
+}
+</script>
+</head>
+
+<body>
+
+
+<form name ="calc">
+
+<table border="4" cellpadding="1" bordercolor="#FFFFFF" bgcolor="#73B27B" cellspacing="2" width="222">
+<tr>
+<td>
+
+<input name = "calcdisp" type="text" size="25" length="25" value="" name="ans">
+</tr>
+</td>
+
+
+<tr>
+<td>
+<input type="button" onClick="input(this.value)" value="7" name="7" title="7" >
+<input type="button" onClick="input(this.value)"  value="8" name="8" title="8" >
+
+<input type="button" onClick="input(this.value)"  value="9" name="9" title="9" >
+
+<input type = "button" value = " / "onClick="input(this.value)" button ><br>
+
+</tr>
+</td>
+<tr>
+<td>
+<input type="button" onClick="input(this.value)" value="4" name="4"  >
+
+<input type="button" onClick="input(this.value)" value="5" name="5"  >
+
+<input type="button" onClick="input(this.value)" value="6" name="6" title="6" >
+
+<input type = "button" value = " * "onClick="input(this.value)"><br>
+
+</tr>
+</td>
+<tr>
+<td>
+
+
+<input type="button" onClick="input(this.value)"  value="1" name="1"  >
+
+<input type="button" onClick="input(this.value)"  value="2" name="2"  >
+
+<input type="button" onClick="input(this.value)"  value="3" name="3"  >
+
+<input type = "button" value = "-"onClick="input(this.value)"  >
+</td>
+</tr>
+
+<tr>
+<td>
+
+
+<input type = "button" value = "C" onClick="erase()"=''" value="C" name="C" >
+<input type="button" onClick="input(this.value)"  value="0" name="0"  >
+<input type = "button" value = "=" onclick = "ev1()">
+
+<input type = "button" value = "+"onclick ="input(this.value)" >
+</td>
+</tr>
+
+<p align = "center">
+
+</table>
+</form>
+</html>
